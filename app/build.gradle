@@ -85,6 +85,8 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-webview:0.27.0'
     implementation 'com.google.accompanist:accompanist-swiperefresh:0.27.0'
     implementation "com.google.accompanist:accompanist-insets-ui:0.27.0"
+    implementation "com.google.accompanist:accompanist-pager:0.27.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.27.0"
 
     implementation "com.github.skydoves:landscapist-coil:2.0.2"
     implementation "com.github.skydoves:landscapist-animation:2.0.2"
@@ -96,6 +98,14 @@ dependencies {
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.10.0"))
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    testImplementation "androidx.paging:paging-common:$paging_version"
+    implementation "androidx.paging:paging-rxjava2:$paging_version"
+    implementation "androidx.paging:paging-rxjava3:$paging_version"
+    implementation "androidx.paging:paging-guava:$paging_version"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
 
     testImplementation("com.squareup.okhttp3:mockwebserver:4.10.0")
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"

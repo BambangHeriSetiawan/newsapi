@@ -11,19 +11,18 @@ import retrofit2.http.Query
  * @Date: 25,October,2022
  */
 interface NetworkService {
-	@GET("top-headlines")
+	@GET("top-headlines?pageSize=15&language=en")
 	suspend fun headlines(
 		@Query("q") keyword:String?,
+		@Query("category") category:String?,
 		@Query("page") page:Int?,
-		@Query("pageSize") pageSize:Int?,
 		
 	):ApiResponse<List<Article>>
 	
-	@GET("everything")
+	@GET("everything?pageSize=15&language=en")
 	suspend fun everything(
 		@Query("q") keyword:String?,
 		@Query("page") page:Int?,
-		@Query("pageSize") pageSize:Int?,
 		
 		):ApiResponse<List<Article>>
 }

@@ -3,16 +3,20 @@ package com.simxd.newsapi
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.simxd.newsapi.ui.theme.NewsapiTheme
+import com.simxd.newsapi.screen.MainScreen
 
+
+import com.simxd.newsapi.ui.theme.NewsapiTheme
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+	private val  vm: MainVM by viewModels()
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContent {
@@ -22,22 +26,9 @@ class MainActivity : ComponentActivity() {
 					modifier = Modifier.fillMaxSize(),
 					color = MaterialTheme.colorScheme.background
 				) {
-					Greeting("Android")
+					MainScreen(vm)
 				}
 			}
 		}
-	}
-}
-
-@Composable
-fun Greeting(name: String) {
-	Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-	NewsapiTheme {
-		Greeting("Android")
 	}
 }
