@@ -13,14 +13,14 @@ object DataHelper {
 	
 	fun tabs(): ArrayList<TabPageModel> {
 		return arrayListOf<TabPageModel>(
-			TabPageModel(0,"all"),
-			TabPageModel(1,"general"),
-			TabPageModel(2,"technology"),
-			TabPageModel(3,"sports"),
-			TabPageModel(4,"science"),
-			TabPageModel(5,"health"),
-			TabPageModel(6,"entertainment"),
-			TabPageModel(7,"business"),
+			TabPageModel(0,null,"All"),
+			TabPageModel(1,"general","General"),
+			TabPageModel(2,"technology","Technology"),
+			TabPageModel(3,"sports","Sports"),
+			TabPageModel(4,"science","Science"),
+			TabPageModel(5,"health","Health"),
+			TabPageModel(6,"entertainment","Entertainment"),
+			TabPageModel(7,"business","Business"),
 		);
 	}
 	fun sampleArticles(): List<Article> {

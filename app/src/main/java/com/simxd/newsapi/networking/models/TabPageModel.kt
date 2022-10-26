@@ -7,5 +7,6 @@ package com.simxd.newsapi.networking.models
  */
 data class TabPageModel(
 	val id:Int,
-	val code:String
+	val code:String?,
+	val title:String?
 )

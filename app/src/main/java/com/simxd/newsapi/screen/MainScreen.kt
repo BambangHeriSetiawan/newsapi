@@ -4,11 +4,11 @@ package com.simxd.newsapi.screen
 import androidx.compose.foundation.layout.*
 
 import androidx.compose.material3.*
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -16,7 +16,6 @@ import com.google.accompanist.pager.rememberPagerState
 import com.simxd.newsapi.MainVM
 import com.simxd.newsapi.screen.components.ArticlePage
 import com.simxd.newsapi.utils.DataHelper
-import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 
 /**
@@ -33,7 +32,7 @@ fun MainScreen(
 	val categories = DataHelper.tabs()
 	Scaffold(
 		topBar = {
-			CenterAlignedTopAppBar(title = { Text(text = "AppBar")}, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+			CenterAlignedTopAppBar(title = { Text(text = "NewApi")}, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
 				containerColor = Color.Blue,
 				titleContentColor = Color.White
 			))
@@ -48,15 +47,20 @@ fun MainScreen(
 			) {
 				ScrollableTabRow(
 					selectedTabIndex = pageState.currentPage,
-					modifier = Modifier.fillMaxWidth()
+					modifier = Modifier.fillMaxWidth(),
+					indicator = {tabPositions ->
+						
+						TabRowDefaults.Indicator(Modifier.tabIndicatorOffset(tabPositions[pageState.currentPage]))
+					}
 				) {
 					categories.forEachIndexed { index, tabPageModel ->
 						Tab(
 							selected = pageState.currentPage == index,
 							onClick = {
-									  viewModel.load("Indonesia", categories[index].code, 1)
+									  viewModel.load(null, categories[index].code)
 							},
-							text = { Text(text = tabPageModel.code.uppercase(Locale.ROOT))}
+							text = { tabPageModel.title?.uppercase(Locale.ROOT)
+								?.let { it1 -> Text(text = it1) } }
 						)
 					}
 				}
@@ -67,10 +71,10 @@ fun MainScreen(
 						.weight(1f)
 						.fillMaxWidth()
 				) { page: Int ->
-					viewModel.load("Indonesia", categories[page].code, 1)
+					viewModel.load(null, categories[pageState.currentPage].code)
 					
 					Box(modifier = Modifier.fillMaxSize()) {
-						ArticlePage(articles = DataHelper.sampleArticles())
+						viewModel.articles?.let { it1 -> ArticlePage(articles = it1) }
 					}
 				}
 			}

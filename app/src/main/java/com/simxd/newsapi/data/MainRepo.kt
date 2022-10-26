@@ -20,35 +20,7 @@ class MainRepo @Inject constructor(
 	
 	 @OptIn(DelicateCoroutinesApi::class)
 	 fun loadHeadline(keyword:String? = "Indonesia", category:String, page:Int? = 1, listener:OnLoadHeadLine){
-		 listener.onLoad(true)
-		 GlobalScope.launch(CoroutineExceptionHandler { _, _ ->  }){
-			 launch {
-				 
-				 if (category == "all"){
-					 networkService.headlines(keyword = keyword,category= category, page = page).suspendOnSuccess {
-						 listener.onSuccess(this.response.body())
-						 listener.onLoad(false)
-					 }?.onFailure {
-						 listener.onError(this.message())
-						 listener.onLoad(false)
-					 }?.onException {
-						 listener.onError(this.message())
-						 listener.onLoad(false)
-					 }
-				 }else {
-					 networkService.headlines(keyword = keyword,category= category, page = page).suspendOnSuccess {
-						 listener.onSuccess(this.response.body())
-						 listener.onLoad(false)
-					 }?.onFailure {
-						 listener.onError(this.message())
-						 listener.onLoad(false)
-					 }?.onException {
-						 listener.onError(this.message())
-						 listener.onLoad(false)
-					 }
-				 }
-			 }
-		 }
+		
 	}
 	interface OnLoadHeadLine {
 		fun onLoad(state:Boolean)

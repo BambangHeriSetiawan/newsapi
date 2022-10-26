@@ -1,9 +1,14 @@
 package com.simxd.newsapi
 
 import androidx.lifecycle.ViewModel
-import com.simxd.newsapi.data.MainRepo
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.simxd.newsapi.networking.ArticlePageSource
+import com.simxd.newsapi.networking.NetworkService
 import com.simxd.newsapi.networking.models.Article
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -13,21 +18,12 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainVM @Inject constructor(
-	private val mainRepo: MainRepo
+	private val networkService: NetworkService
 ):ViewModel() {
-	fun load(keyword:String, category:String, page:Int,){
-		mainRepo.loadHeadline(keyword = keyword, category = category, page = page, object : MainRepo.OnLoadHeadLine {
-			override fun onLoad(state: Boolean) {
-			
-			}
-			
-			override fun onError(msg: String) {
-			
-			}
-			
-			override fun onSuccess(articles: List<Article>?) {
-			
-			}
-		})
+	var articles: Flow<PagingData<Article>>? = null
+	fun load(keyword: String?, category:String?){
+		articles = Pager(PagingConfig(pageSize = 5, enablePlaceholders = true)){
+			ArticlePageSource(networkService, keyword, category)
+		}.flow
 	}
 }

@@ -22,7 +22,7 @@ import com.simxd.newsapi.utils.NetworkImage
 @Preview(showBackground = true)
 @Composable
 fun ArticleItem(
-	@PreviewParameter(ArticlePreviewProvider::class) article: Article
+	@PreviewParameter(ArticlePreviewProvider::class) article: Article?
 ){
 	Card(
 		modifier = Modifier
@@ -33,8 +33,8 @@ fun ArticleItem(
 			verticalArrangement = Arrangement.Center,
 			horizontalAlignment = Alignment.CenterHorizontally
 		) {
-			NetworkImage(url = article.urlToImage!!, modifier = Modifier.fillMaxWidth().height(150.dp))
-			Text(text = article.title!!, modifier = Modifier.padding(10.dp))
+			NetworkImage(url = article?.urlToImage!!, modifier = Modifier.fillMaxWidth().height(150.dp))
+			Text(text = article?.title!!, modifier = Modifier.padding(10.dp))
 		}
 	}
 }

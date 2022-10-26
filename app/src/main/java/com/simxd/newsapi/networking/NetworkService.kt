@@ -1,6 +1,7 @@
 package com.simxd.newsapi.networking
 
 import com.simxd.newsapi.networking.models.Article
+import com.simxd.newsapi.networking.models.ResponseArticle
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,12 +18,12 @@ interface NetworkService {
 		@Query("category") category:String?,
 		@Query("page") page:Int?,
 		
-	):ApiResponse<List<Article>>
+	):ResponseArticle
 	
 	@GET("everything?pageSize=15&language=en")
 	suspend fun everything(
 		@Query("q") keyword:String?,
 		@Query("page") page:Int?,
 		
-		):ApiResponse<List<Article>>
+		):ResponseArticle
 }
