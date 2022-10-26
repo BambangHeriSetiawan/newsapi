@@ -1,5 +1,6 @@
 package com.simxd.newsapi.screen.components
 
+import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -17,6 +19,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.simxd.newsapi.DetailArticleActivity
 import com.simxd.newsapi.networking.models.Article
 import com.simxd.newsapi.utils.ArticlesPreviewProvider
 import kotlinx.coroutines.flow.Flow
@@ -39,20 +42,11 @@ fun ArticlePage(
 	){
 		if (articleItems.itemCount >=1){
 			items(articleItems){value: Article? ->
-				ArticleItem(article = value)
+				ArticleItem(article = value, onClicked = {
+				})
 			}
-		}else {
-			item { Column(
-				
-				verticalArrangement = Arrangement.Center,
-				horizontalAlignment = Alignment.CenterHorizontally
-			) {
-				Empty()
-			} }
 		}
-		items(articleItems){value: Article? ->
-			ArticleItem(article = value)
-		}
+		
 		articleItems.apply {
 			when{
 				loadState.refresh is LoadState.Loading -> {
@@ -72,6 +66,7 @@ fun ArticlePage(
 							verticalArrangement = Arrangement.Bottom,
 							horizontalAlignment = Alignment.CenterHorizontally
 						){
+							Empty()
 							Error(msg = e.error.message!!, onClickRetry = { retry()})
 						}
 						
@@ -84,6 +79,7 @@ fun ArticlePage(
 							verticalArrangement = Arrangement.Bottom,
 							horizontalAlignment = Alignment.CenterHorizontally
 						) {
+							Empty()
 							Error(msg = e.error.message!!, onClickRetry = { retry()})
 						}
 						

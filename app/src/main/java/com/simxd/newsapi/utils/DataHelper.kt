@@ -26,7 +26,7 @@ object DataHelper {
 	fun sampleArticles(): List<Article> {
 		return listOf(
 			Article(
-				source = Source(name = "", id = 0),
+				source = Source(name = "", id = ""),
 				author = "Rae Wee",
 				publishedAt = "2022-10-05T07:34:33Z",
 				url = "https://finance.yahoo.com/news/asias-borrowers-turn-homeward-local-073433936.html",
@@ -35,7 +35,7 @@ object DataHelper {
 				description = "Asian issuance of bonds denominated in local currencies have ballooned to their largest in more than a decade as borrowers turn shy of expensive U.S. dollar"
 			),
 			Article(
-				source = Source(name = "", id = 0),
+				source = Source(name = "", id = ""),
 				author = "Rae Wee",
 				publishedAt = "2022-10-05T07:34:33Z",
 				url = "https://finance.yahoo.com/news/asias-borrowers-turn-homeward-local-073433936.html",

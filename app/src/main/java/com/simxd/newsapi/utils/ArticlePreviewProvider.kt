@@ -13,7 +13,7 @@ class ArticlePreviewProvider:PreviewParameterProvider<Article> {
 	override val values: Sequence<Article>
 		get() = sequenceOf(
 			Article(
-			source = Source(name = "", id = 0),
+			source = Source(name = "", id = "0"),
 				author = "Rae Wee",
 				publishedAt = "2022-10-05T07:34:33Z",
 				url = "https://finance.yahoo.com/news/asias-borrowers-turn-homeward-local-073433936.html",
